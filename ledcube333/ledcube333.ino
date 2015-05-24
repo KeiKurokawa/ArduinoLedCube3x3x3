@@ -84,9 +84,10 @@ void setup() {
   MsTimer2::set(25,readSensor);
   MsTimer2::start();
 
+#ifdef _DEBUG_
   Serial.begin(9600);
   Serial.print('\r');
-
+#endif
 }
 
 char buf[256];
@@ -98,9 +99,10 @@ void loop() {
     TEMP_LED[1]=ANIM_1_MID[n];
     TEMP_LED[2]=ANIM_1_BOT[n];
     int cyctime = map(lightVal,0,SENSOR_MAX,200,10);
+#ifdef _DEBUG_
     sprintf(buf,"vv:: %d %d",lightVal,cyctime);
     Serial.println(buf);
-   
+#endif   
     DynaDrive(TEMP_LED,cyctime); //配列の先頭のポインタのみ与えられる。
     AllOFF();
   }
